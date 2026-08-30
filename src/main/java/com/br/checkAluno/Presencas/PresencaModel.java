@@ -1,0 +1,35 @@
+package com.br.checkAluno.Presencas;
+
+import com.br.checkAluno.Alunos.AlunosService;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+@Entity
+@Table(name = "presencas")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PresencaModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @CreationTimestamp
+    @Column(name = "data_hora", nullable = false, updatable = false)
+    private LocalDateTime dataHora;
+
+    @Column(name = "status")
+    private String status;
+
+    @OneToOne
+    @JoinColumn(name = "alunos_id")
+    private AlunosService alunosService;
+
+}
