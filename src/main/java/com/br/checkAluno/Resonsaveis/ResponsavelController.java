@@ -1,5 +1,6 @@
 package com.br.checkAluno.Resonsaveis;
 
+import com.br.checkAluno.Alunos.AlunosModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class ResponsavelController {
 
     ResponsaveisService responsaveisService;
+    AlunosModel alunosModel;
 
     public ResponsavelController(ResponsaveisService responsaveisService) {
         this.responsaveisService = responsaveisService;

@@ -18,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ResponsaveisModel {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,7 @@ public class ResponsaveisModel {
     private String nome;
 
     @Column(unique = true)
-    private Integer cpf;
+    private String cpf;
 
     @Column(unique = true)
     private String email;
