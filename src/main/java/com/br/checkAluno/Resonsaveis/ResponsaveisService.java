@@ -22,6 +22,10 @@ public class ResponsaveisService {
         return responsaveisRepository.findAll();
     }
 
+    public ResponsaveisModel criarResponsavel(ResponsaveisModel responsaveisModel) {
+        return responsaveisRepository.save(responsaveisModel);
+    }
+
     public ResponsaveisModel listarPorId(Long id) {
         Optional<ResponsaveisModel> responsavel = responsaveisRepository.findById(id);
         ResponsaveisModel resposavel = responsavel.orElse(null);
