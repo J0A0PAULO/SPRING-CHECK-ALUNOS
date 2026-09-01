@@ -14,7 +14,7 @@ public class AlunosController {
 
     @GetMapping("/listar")
     public List<AlunosModel> listarAlunos() {
-        return alunosService.listarAlunos();
+        return alunosService.listar();
     }
 
     @GetMapping("/listar/{id}")
@@ -24,16 +24,16 @@ public class AlunosController {
 
     @PostMapping("/criar")
     public AlunosModel criarAluno(@RequestBody AlunosModel alunosModel) {
-        return alunosService.criarAluno(alunosModel);
+        return alunosService.criar(alunosModel);
     }
 
     @DeleteMapping("/deletar/{id}")
     public void deletarAluno(@PathVariable Long id) {
-        alunosService.deletarAluno(id);
+        alunosService.deletar(id);
     }
 
     @PutMapping("/atualizar")
     public AlunosModel atualizarAluno(@PathVariable Long id, @RequestBody AlunosModel alunosModel){
-        return alunosService.atualizarAluno(id,  alunosModel);
+        return alunosService.atualizar(id,  alunosModel);
     }
 }
