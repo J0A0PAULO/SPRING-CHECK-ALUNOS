@@ -1,5 +1,6 @@
 package com.br.checkAluno.Alunos;
 
+import com.br.checkAluno.Resonsaveis.ResponsaveisRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.Optional;
 public class AlunosService {
 
     AlunosRepository alunosRepository;
+    ResponsaveisRepository responsaveisRepository;
 
-    public AlunosService(AlunosRepository alunosRepository) {
+    public AlunosService(AlunosRepository alunosRepository, ResponsaveisRepository responsaveisRepository) {
         this.alunosRepository = alunosRepository;
+        this.responsaveisRepository = responsaveisRepository;
     }
 
     public List<AlunosModel> listar() {

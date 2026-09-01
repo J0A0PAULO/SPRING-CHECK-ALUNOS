@@ -39,6 +39,6 @@ public class AlunosModel {
 
     @ManyToOne
     @JoinColumn(name = "responsavel_id")
-    private ResponsaveisModel responsaveisModel;
+    private ResponsaveisModel responsavel;
 
 }

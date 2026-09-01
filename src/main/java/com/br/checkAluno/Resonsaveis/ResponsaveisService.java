@@ -1,5 +1,6 @@
 package com.br.checkAluno.Resonsaveis;
 
+import com.br.checkAluno.Alunos.AlunosRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +14,9 @@ public class ResponsaveisService {
 
     private ResponsaveisRepository responsaveisRepository;
 
-
-    //a
     public ResponsaveisService(ResponsaveisRepository responsaveisRepository) {
         this.responsaveisRepository = responsaveisRepository;
+
     }
 
     public List<ResponsaveisModel> listar() {
@@ -24,6 +24,7 @@ public class ResponsaveisService {
     }
 
     public ResponsaveisModel criar(ResponsaveisModel responsaveisModel) {
+
         return responsaveisRepository.save(responsaveisModel);
     }
 

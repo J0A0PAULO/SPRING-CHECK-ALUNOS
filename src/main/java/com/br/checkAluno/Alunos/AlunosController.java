@@ -1,9 +1,12 @@
 package com.br.checkAluno.Alunos;
 
 
+import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
+import com.br.checkAluno.Resonsaveis.ResponsaveisRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("alunos")
