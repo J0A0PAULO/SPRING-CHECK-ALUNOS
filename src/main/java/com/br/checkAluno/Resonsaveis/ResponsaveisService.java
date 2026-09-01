@@ -13,16 +13,17 @@ public class ResponsaveisService {
 
     private ResponsaveisRepository responsaveisRepository;
 
+
     //a
     public ResponsaveisService(ResponsaveisRepository responsaveisRepository) {
         this.responsaveisRepository = responsaveisRepository;
     }
 
-    public List<ResponsaveisModel> listarResponsaveis() {
+    public List<ResponsaveisModel> listar() {
         return responsaveisRepository.findAll();
     }
 
-    public ResponsaveisModel criarResponsavel(ResponsaveisModel responsaveisModel) {
+    public ResponsaveisModel criar(ResponsaveisModel responsaveisModel) {
         return responsaveisRepository.save(responsaveisModel);
     }
 
@@ -32,7 +33,7 @@ public class ResponsaveisService {
         return resposavel;
     }
 
-    public ResponsaveisModel alterarPorID(Long id, ResponsaveisModel responsavelAlterado) {
+    public ResponsaveisModel atualizar(Long id, ResponsaveisModel responsavelAlterado) {
         Optional<ResponsaveisModel> responsavelPorID = responsaveisRepository.findById(id);
         if (responsavelPorID.isPresent()) {
             responsavelPorID.orElse(null);
@@ -46,6 +47,5 @@ public class ResponsaveisService {
     public void deletar(Long id) {
         responsaveisRepository.deleteById(id);
     }
-
 
 }

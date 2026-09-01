@@ -14,7 +14,7 @@ public class AlunosService {
         this.alunosRepository = alunosRepository;
     }
 
-    public List<AlunosModel> listarAlunos() {
+    public List<AlunosModel> listar() {
         return alunosRepository.findAll();
     }
 
@@ -25,11 +25,11 @@ public class AlunosService {
 
     }
 
-    public AlunosModel criarAluno(AlunosModel alunosModel) {
+    public AlunosModel criar(AlunosModel alunosModel) {
        return alunosRepository.save(alunosModel);
     }
 
-    public AlunosModel atualizarAluno(Long id, AlunosModel alunosModel) {
+    public AlunosModel atualizar(Long id, AlunosModel alunosModel) {
         Optional<AlunosModel> alunoEncontrado = alunosRepository.findById(id);
         if (alunoEncontrado.isPresent()) {
             alunosModel.setId(id);
@@ -39,7 +39,7 @@ public class AlunosService {
         return null;
     }
 
-    public void deletarAluno(Long id) {
+    public void deletar(Long id) {
         alunosRepository.deleteById(id);
     }
 

@@ -10,15 +10,14 @@ import java.util.List;
 public class ResponsavelController {
 
     ResponsaveisService responsaveisService;
-    AlunosModel alunosModel;
 
-    public ResponsavelController(ResponsaveisService responsaveisService) {
+    public ResponsavelController(ResponsaveisService responsaveisService ) {
         this.responsaveisService = responsaveisService;
     }
 
     @GetMapping("/listar")
-    public List<ResponsaveisModel> listarResponsaveis() {
-        return responsaveisService.listarResponsaveis();
+    public List<ResponsaveisModel> listar() {
+        return responsaveisService.listar();
     }
 
     @GetMapping("/listar/{id}")
@@ -27,13 +26,13 @@ public class ResponsavelController {
     }
 
     @PostMapping("/criar")
-    public ResponsaveisModel criarResponsavel(@RequestBody ResponsaveisModel responsaveisModel) {
-        return responsaveisService.criarResponsavel(responsaveisModel);
+    public ResponsaveisModel criar(@RequestBody ResponsaveisModel responsaveisModel) {
+        return responsaveisService.criar(responsaveisModel);
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponsaveisModel atualizarResponsavel(@PathVariable Long id, ResponsaveisModel responsaveisModel) {
-        return responsaveisService.alterarPorID(1L, responsaveisModel);
+    public ResponsaveisModel atualizar(@PathVariable Long id, ResponsaveisModel responsaveisModel) {
+        return responsaveisService.atualizar(1L, responsaveisModel);
     }
 
     @DeleteMapping("/deletar/{id}")

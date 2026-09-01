@@ -1,5 +1,6 @@
 package com.br.checkAluno.Presencas;
 
+import com.br.checkAluno.Alunos.AlunosModel;
 import com.br.checkAluno.Alunos.AlunosService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,6 @@ public class PresencaModel {
 
     @OneToOne
     @JoinColumn(name = "alunos_id")
-    private AlunosService alunosService;
+    private AlunosModel alunosModel;
 
 }
