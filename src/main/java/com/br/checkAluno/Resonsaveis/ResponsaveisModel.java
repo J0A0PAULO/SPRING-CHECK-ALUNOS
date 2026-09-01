@@ -1,6 +1,7 @@
 package com.br.checkAluno.Resonsaveis;
 
 import com.br.checkAluno.Alunos.AlunosModel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,8 +39,8 @@ public class ResponsaveisModel {
     @Column(name = "criado_em", nullable = false, updatable = false)
     LocalDateTime localDateTime;
 
-    @OneToMany
-    @JoinColumn(name = "responsavel_id")
+    @OneToMany(mappedBy = "responsavel")
+    @JsonIgnoreProperties("responsavel")
     private List<AlunosModel> Aluno;
 
 }

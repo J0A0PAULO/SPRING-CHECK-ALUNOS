@@ -1,5 +1,6 @@
 package com.br.checkAluno.Alunos;
 
+import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
 import com.br.checkAluno.Resonsaveis.ResponsaveisRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,9 @@ public class AlunosService {
     }
 
     public AlunosModel criar(AlunosModel alunosModel) {
+
+      ResponsaveisModel responsavel =  responsaveisRepository.getReferenceById(alunosModel.getResponsavel().getId());
+      alunosModel.setResponsavel(responsavel);
        return alunosRepository.save(alunosModel);
     }
 
