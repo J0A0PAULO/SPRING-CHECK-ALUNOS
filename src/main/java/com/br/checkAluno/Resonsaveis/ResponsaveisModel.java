@@ -40,6 +40,6 @@ public class ResponsaveisModel {
 
     @OneToMany
     @JoinColumn(name = "responsavel_id")
-    private List<AlunosModel> alunosModels;
+    private List<AlunosModel> Aluno;
 
 }
