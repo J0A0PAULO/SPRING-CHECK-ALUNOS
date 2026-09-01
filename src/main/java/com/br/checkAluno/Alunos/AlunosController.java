@@ -11,6 +11,9 @@ public class AlunosController {
 
     AlunosService alunosService;
 
+    public AlunosController(AlunosService alunosService) {
+        this.alunosService = alunosService;
+    }
 
     @GetMapping("/listar")
     public List<AlunosModel> listarAlunos() {
