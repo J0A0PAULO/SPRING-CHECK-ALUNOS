@@ -1,5 +1,7 @@
 package com.br.checkAluno.Presencas;
 
+import com.br.checkAluno.Alunos.AlunosModel;
+import com.br.checkAluno.Alunos.AlunosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.Optional;
 public class PresencaService {
 
     PresencaRepository presencaRepository;
+    AlunosRepository alunosRepository;
 
-    public PresencaService(PresencaRepository presencaRepository) {
+    public PresencaService(PresencaRepository presencaRepository, AlunosRepository alunosRepository) {
         this.presencaRepository = presencaRepository;
+        this.alunosRepository = alunosRepository;
     }
 
     public List<PresencaModel> listarPresenca() {
@@ -24,21 +28,14 @@ public class PresencaService {
         return encontrado;
     }
 
-    public PresencaModel Atualizar(Long id, PresencaModel presencaModel) {
-        Optional<PresencaModel> encontradoPorId = presencaRepository.findById(id);
-        if (encontradoPorId.isPresent()) {
-            presencaModel.setId(id);
-             presencaRepository.save(presencaModel);
-             return presencaModel;
-        }
-            return null;
-    }
 
     public void deletar(Long id) {
            presencaRepository.deleteById(id);
     }
 
     public PresencaModel criar(PresencaModel presencaModel) {
+        AlunosModel alunos  = alunosRepository.getReferenceById(presencaModel.getAlunosModel().getId());
+        presencaModel.setAlunosModel(alunos);
         return presencaRepository.save(presencaModel);
     }
 
