@@ -1,6 +1,7 @@
 package com.br.checkAluno.Alunos;
 
 import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Table(name = "alunos")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,7 +40,7 @@ public class AlunosModel {
     private LocalDate dataNascimento;
 
     @ManyToOne
+    @JsonIgnoreProperties("Aluno")
     @JoinColumn(name = "responsavel_id")
     private ResponsaveisModel responsavel;
-
 }

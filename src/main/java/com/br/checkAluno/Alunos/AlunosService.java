@@ -21,18 +21,15 @@ public class AlunosService {
     public List<AlunosModel> listar() {
         return alunosRepository.findAll();
     }
-
     public AlunosModel listarPorId(Long id){
         Optional<AlunosModel> alunos = alunosRepository.findById(id);
         AlunosModel alunoEncontrado = alunos.orElse(null);
         return alunoEncontrado;
-
     }
 
     public AlunosModel criar(AlunosModel alunosModel) {
-
-      ResponsaveisModel responsavel =  responsaveisRepository.getReferenceById(alunosModel.getResponsavel().getId());
-      alunosModel.setResponsavel(responsavel);
+        ResponsaveisModel responsavel = responsaveisRepository.getReferenceById(alunosModel.getResponsavel().getId());
+        alunosModel.setResponsavel(responsavel);
        return alunosRepository.save(alunosModel);
     }
 
