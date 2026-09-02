@@ -1,17 +1,16 @@
 package com.br.checkAluno.Resonsaveis;
 
-import com.br.checkAluno.Alunos.AlunosModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("responsaveis")
-public class ResponsavelController {
+public class ResponsaveisController {
 
     ResponsaveisService responsaveisService;
 
-    public ResponsavelController(ResponsaveisService responsaveisService ) {
+    public ResponsaveisController(ResponsaveisService responsaveisService ) {
         this.responsaveisService = responsaveisService;
     }
 
