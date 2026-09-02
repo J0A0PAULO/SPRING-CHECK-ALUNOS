@@ -34,8 +34,9 @@ public class PresencaService {
     }
 
     public PresencaModel criar(PresencaModel presencaModel) {
-        AlunosModel alunos  = alunosRepository.getReferenceById(presencaModel.getAlunosModel().getId());
-        presencaModel.setAlunosModel(alunos);
+        Optional<AlunosModel> alunoReferencia = alunosRepository.findById(presencaModel.getAlunosModel().getId());
+        AlunosModel alunoEncontrado = alunoReferencia.orElse(null);
+        presencaModel.setAlunosModel(alunoEncontrado);
         return presencaRepository.save(presencaModel);
     }
 

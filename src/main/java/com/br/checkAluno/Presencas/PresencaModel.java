@@ -2,6 +2,7 @@ package com.br.checkAluno.Presencas;
 
 import com.br.checkAluno.Alunos.AlunosModel;
 import com.br.checkAluno.Alunos.AlunosService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class PresencaModel {
     private String status;
 
     @OneToOne
+    @JsonIgnoreProperties("responsavel")
     @JoinColumn(name = "alunos_id")
     private AlunosModel alunosModel;
 

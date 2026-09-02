@@ -29,5 +29,4 @@ public class EmailController {
         return emailSerivce.criar(emailModel);
     }
 
-
 }
