@@ -22,6 +22,7 @@ public class ResponsavelDTO {
     private String email;
     private String telefone;
     LocalDateTime localDateTime;
+    @JsonIgnoreProperties("responsavel")
     private List<AlunosModel> Aluno;
 
 }

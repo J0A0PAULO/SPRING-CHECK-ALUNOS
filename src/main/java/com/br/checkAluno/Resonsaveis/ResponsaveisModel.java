@@ -40,7 +40,6 @@ public class ResponsaveisModel {
     LocalDateTime localDateTime;
 
     @OneToMany(mappedBy = "responsavel")
-    @JsonIgnoreProperties("responsavel")
     private List<AlunosModel> Aluno;
 
 }

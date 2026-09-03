@@ -1,5 +1,8 @@
 package com.br.checkAluno.Resonsaveis;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ResponsaveisMapper {
 
     public ResponsaveisModel map(ResponsavelDTO responsavelDTO) {
@@ -28,7 +31,6 @@ public class ResponsaveisMapper {
         responsavelDTO.setId(responsaveisModel.getId());
         responsavelDTO.setLocalDateTime(responsaveisModel.getLocalDateTime());
         responsavelDTO.setAluno(responsaveisModel.getAluno());
-
 
         return responsavelDTO;
     }

@@ -8,39 +8,44 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ResponsaveisService {
 
     private ResponsaveisRepository responsaveisRepository;
+    private ResponsaveisMapper  responsaveisMapper;
 
-    public ResponsaveisService(ResponsaveisRepository responsaveisRepository) {
+    public ResponsaveisService(ResponsaveisRepository responsaveisRepository, ResponsaveisMapper responsaveisMapper) {
         this.responsaveisRepository = responsaveisRepository;
-
+        this.responsaveisMapper = responsaveisMapper;
     }
 
-    public List<ResponsaveisModel> listar() {
-        return responsaveisRepository.findAll();
+    public List<ResponsavelDTO> listar() {
+        List<ResponsaveisModel> responsaveis = responsaveisRepository.findAll();
+        return responsaveis.stream().map(responsaveisMapper::map).collect(Collectors.toList());
     }
 
-    public ResponsaveisModel criar(ResponsaveisModel responsaveisModel) {
-
-        return responsaveisRepository.save(responsaveisModel);
+    public ResponsavelDTO criar(ResponsavelDTO responsavelDTO) {
+        ResponsaveisModel responsaveisModel = responsaveisMapper.map(responsavelDTO);
+        ResponsaveisModel salvo = responsaveisRepository.save(responsaveisModel);
+        return responsaveisMapper.map(salvo);
     }
 
-    public ResponsaveisModel listarPorId(Long id) {
+    public ResponsavelDTO listarPorId(Long id) {
         Optional<ResponsaveisModel> responsavel = responsaveisRepository.findById(id);
         ResponsaveisModel resposavel = responsavel.orElse(null);
-        return resposavel;
+        ResponsavelDTO responsavelDTO = responsaveisMapper.map(resposavel);
+        return responsavelDTO;
     }
 
-    public ResponsaveisModel atualizar(Long id, ResponsaveisModel responsavelAlterado) {
+    public ResponsavelDTO atualizar(Long id, ResponsavelDTO responsavelDTO) {
         Optional<ResponsaveisModel> responsavelPorID = responsaveisRepository.findById(id);
         if (responsavelPorID.isPresent()) {
-            responsavelPorID.orElse(null);
-        responsavelAlterado.setId(id);
-        responsaveisRepository.save(responsavelAlterado);
-        return responsavelAlterado;
+          ResponsaveisModel responsavelEnviadoPeloUsuario = responsaveisMapper.map(responsavelDTO);
+            responsavelEnviadoPeloUsuario.setId(id);
+          ResponsaveisModel responsavelDTOSalvo= responsaveisRepository.save(responsavelEnviadoPeloUsuario);
+          return responsaveisMapper.map(responsavelDTOSalvo);
         }
         return null;
     }

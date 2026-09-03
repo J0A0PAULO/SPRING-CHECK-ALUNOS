@@ -15,22 +15,22 @@ public class ResponsaveisController {
     }
 
     @GetMapping("/listar")
-    public List<ResponsaveisModel> listar() {
+    public List<ResponsavelDTO> listar() {
         return responsaveisService.listar();
     }
 
     @GetMapping("/listar/{id}")
-    public ResponsaveisModel listarPorId(@PathVariable Long id) {
+    public ResponsavelDTO listarPorId(@PathVariable Long id) {
         return responsaveisService.listarPorId(id);
     }
 
     @PostMapping("/criar")
-    public ResponsaveisModel criar(@RequestBody ResponsaveisModel responsaveisModel) {
+    public ResponsavelDTO criar(@RequestBody ResponsavelDTO responsaveisModel) {
         return responsaveisService.criar(responsaveisModel);
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponsaveisModel atualizar(@PathVariable Long id, ResponsaveisModel responsaveisModel) {
+    public ResponsavelDTO atualizar(@PathVariable Long id, ResponsavelDTO responsaveisModel) {
         return responsaveisService.atualizar(1L, responsaveisModel);
     }
 
