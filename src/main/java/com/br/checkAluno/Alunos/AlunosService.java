@@ -1,44 +1,68 @@
 package com.br.checkAluno.Alunos;
 
+import com.br.checkAluno.Resonsaveis.ResponsaveisMapper;
 import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
 import com.br.checkAluno.Resonsaveis.ResponsaveisRepository;
+import com.br.checkAluno.Resonsaveis.ResponsavelDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AlunosService {
 
     AlunosRepository alunosRepository;
     ResponsaveisRepository responsaveisRepository;
+    ResponsaveisMapper responsaveisMapper;
+    AlunosMapper alunosMapper;
 
-    public AlunosService(AlunosRepository alunosRepository, ResponsaveisRepository responsaveisRepository) {
+    public AlunosService(AlunosRepository alunosRepository, ResponsaveisRepository responsaveisRepository,AlunosMapper alunosMapper, ResponsaveisMapper responsaveisMapper) {
         this.alunosRepository = alunosRepository;
         this.responsaveisRepository = responsaveisRepository;
+        this.responsaveisMapper = responsaveisMapper;
+        this.alunosMapper = alunosMapper;
     }
 
-    public List<AlunosModel> listar() {
-        return alunosRepository.findAll();
+    public List<AlunosDTO> listar() {
+        List<AlunosModel> alunos = alunosRepository.findAll();
+        return alunos.stream().map(alunosMapper::map).collect(Collectors.toList());
     }
-    public AlunosModel listarPorId(Long id){
+
+
+    public AlunosDTO listarPorId(Long id){
         Optional<AlunosModel> alunos = alunosRepository.findById(id);
-        AlunosModel alunoEncontrado = alunos.orElse(null);
-        return alunoEncontrado;
+        if (alunos.isPresent()) {
+        AlunosModel alunoEncontrado = alunos.get();
+        return alunosMapper.map(alunoEncontrado);
+        }
+        return null;
     }
 
-    public AlunosModel criar(AlunosModel alunosModel) {
-        ResponsaveisModel responsavel = responsaveisRepository.getReferenceById(alunosModel.getResponsavel().getId());
-        alunosModel.setResponsavel(responsavel);
-       return alunosRepository.save(alunosModel);
+    public AlunosDTO criar(AlunosDTO alunosDTO) {
+        Optional<ResponsaveisModel> responsavelReferencia = responsaveisRepository.findById(alunosDTO.getResponsavel().getId());
+        if (responsavelReferencia.isPresent()) {
+            ResponsaveisModel responsavelEncontrado = responsavelReferencia.get();
+            AlunosModel alunosModel = alunosMapper.map(alunosDTO);
+            alunosModel.setResponsavel(responsavelEncontrado);
+            alunosRepository.save(alunosModel);
+            return alunosMapper.map(alunosModel);
+        }
+        return null;
     }
 
-    public AlunosModel atualizar(Long id, AlunosModel alunosModel) {
+    public AlunosDTO atualizar(Long id, AlunosDTO alunosDTO) {
         Optional<AlunosModel> alunoEncontrado = alunosRepository.findById(id);
-        if (alunoEncontrado.isPresent()) {
+        Optional<ResponsaveisModel> responsavelReferencia = responsaveisRepository.findById(alunosDTO.getResponsavel().getId());
+        if (alunoEncontrado.isPresent() && responsavelReferencia.isPresent()) {
+            ResponsaveisModel responsavelEncontrado = responsavelReferencia.get();
+            AlunosModel alunosModel = alunosMapper.map(alunosDTO);
+            alunosModel.setResponsavel(responsavelEncontrado);
             alunosModel.setId(id);
-             alunosRepository.save(alunosModel);
-             return alunosModel;
+            alunosRepository.save(alunosModel);
+            AlunosDTO aluno = alunosMapper.map(alunosModel);
+             return aluno;
         }
         return null;
     }
