@@ -13,7 +13,7 @@ public class AlunosMapper {
         alunosModel.setId(alunosDTO.getId());
         alunosModel.setCpf(alunosDTO.getCpf());
         alunosModel.setEmail(alunosDTO.getEmail());
-        alunosModel.setNome(alunosDTO.getEmail());
+        alunosModel.setNome(alunosDTO.getNome());
         alunosModel.setMatricula(alunosDTO.getMatricula());
         alunosModel.setDataNascimento(alunosDTO.getDataNascimento());
 
@@ -26,6 +26,7 @@ public class AlunosMapper {
         AlunosDTO alunosDTO = new AlunosDTO();
 
         alunosDTO.setCpf(alunosModel.getCpf());
+        alunosDTO.setId(alunosModel.getId());
         alunosDTO.setMatricula(alunosModel.getMatricula());
         alunosDTO.setResponsavel(alunosModel.getResponsavel());
         alunosDTO.setDataNascimento(alunosModel.getDataNascimento());
