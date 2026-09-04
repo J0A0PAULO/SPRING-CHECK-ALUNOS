@@ -30,7 +30,7 @@ public class ResponsaveisController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponsavelDTO atualizar(@PathVariable Long id, ResponsavelDTO responsaveisModel) {
+    public ResponsavelDTO atualizar(@PathVariable Long id,@RequestBody ResponsavelDTO responsaveisModel) {
         return responsaveisService.atualizar(1L, responsaveisModel);
     }
 
