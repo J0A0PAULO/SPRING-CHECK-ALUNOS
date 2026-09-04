@@ -38,7 +38,7 @@ public class AlunosController {
         alunosService.deletar(id);
     }
 
-    @PutMapping("/atualizar")
+    @PutMapping("/atualizar/{id}")
     public AlunosDTO atualizarAluno(@PathVariable Long id, @RequestBody AlunosDTO alunosDTO){
         return alunosService.atualizar(id,  alunosDTO);
     }
