@@ -30,7 +30,7 @@ public class PresencaController {
         return presencaService.criar(presencaModel);
     }
 
-    @PutMapping("/atualizar")
+    @PutMapping("/atualizar/{id}")
     public PresencaModel atualizar(@PathVariable Long id, @RequestBody PresencaModel presencaModel) {
         return presencaService.atualizar(id, presencaModel);
     }
