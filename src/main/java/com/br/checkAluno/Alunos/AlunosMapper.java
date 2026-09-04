@@ -13,6 +13,7 @@ public class AlunosMapper {
         alunosModel.setId(alunosDTO.getId());
         alunosModel.setCpf(alunosDTO.getCpf());
         alunosModel.setEmail(alunosDTO.getEmail());
+        alunosModel.setTelefone(alunosDTO.getTelefone());
         alunosModel.setNome(alunosDTO.getNome());
         alunosModel.setMatricula(alunosDTO.getMatricula());
         alunosModel.setDataNascimento(alunosDTO.getDataNascimento());
