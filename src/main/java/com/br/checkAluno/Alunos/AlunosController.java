@@ -19,18 +19,18 @@ public class AlunosController {
     }
 
     @GetMapping("/listar")
-    public List<AlunosModel> listarAlunos() {
+    public List<AlunosDTO> listarAlunos() {
         return alunosService.listar();
     }
 
     @GetMapping("/listar/{id}")
-    public AlunosModel listarPorId(@PathVariable Long id) {
+    public AlunosDTO listarPorId(@PathVariable Long id) {
         return alunosService.listarPorId(id);
     }
 
     @PostMapping("/criar")
-    public AlunosModel criarAluno(@RequestBody AlunosModel alunosModel) {
-        return alunosService.criar(alunosModel);
+    public AlunosDTO criarAluno(@RequestBody AlunosDTO alunosDTO) {
+        return alunosService.criar(alunosDTO);
     }
 
     @DeleteMapping("/deletar/{id}")
@@ -39,7 +39,7 @@ public class AlunosController {
     }
 
     @PutMapping("/atualizar")
-    public AlunosModel atualizarAluno(@PathVariable Long id, @RequestBody AlunosModel alunosModel){
-        return alunosService.atualizar(id,  alunosModel);
+    public AlunosDTO atualizarAluno(@PathVariable Long id, @RequestBody AlunosDTO alunosDTO){
+        return alunosService.atualizar(id,  alunosDTO);
     }
 }
