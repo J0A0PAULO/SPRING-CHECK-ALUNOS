@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmailSerivce {
@@ -14,14 +15,17 @@ public class EmailSerivce {
 
     private JavaMailSender javaMailSender;
     private EmailRepository emailRepository;
+    private EmailMapper emailMapper;
 
-    public EmailSerivce(JavaMailSender javaMailSender, EmailRepository emailRepository) {
+    public EmailSerivce(JavaMailSender javaMailSender, EmailRepository emailRepository, EmailMapper emailMapper) {
         this.javaMailSender = javaMailSender;
         this.emailRepository = emailRepository;
+        this.emailMapper = emailMapper;
     }
 
-    public List<EmailModel> listar() {
-        return emailRepository.findAll();
+    public List<EmailDTO> listar() {
+        List<EmailModel> emails =  emailRepository.findAll();
+        return emails.stream().map(emailMapper::map).collect(Collectors.toList());
     }
 
     public void enviarEmail(String destinatario, String assunto, String texto ){
@@ -51,24 +55,28 @@ public class EmailSerivce {
 
     }
 
-    public EmailModel listarPorId(Long id) {
+    public EmailDTO listarPorId(Long id) {
         Optional<EmailModel> emailPorId = emailRepository.findById(id);
-        EmailModel emailEncontrado = emailPorId.orElse(null);
-        return emailEncontrado;
-    }
-
-    public EmailModel atualizar (Long id, EmailModel emailModel) {
-        Optional<EmailModel> emailEncontrado = emailRepository.findById(id);
-        if (emailEncontrado.isPresent()) {
-            emailModel.setId(id);
-           return emailRepository.save(emailModel);
+        if (emailPorId.isPresent()) {
+        EmailModel emailEncontrado = emailPorId.get();
+            EmailDTO emailDTO = emailMapper.map(emailEncontrado);
+            return emailDTO;
         }
         return null;
     }
 
-    public EmailModel criar(EmailModel emailModel) {
-        return emailRepository.save(emailModel);
+    public EmailDTO atualizar (Long id, EmailDTO emailDTO) {
+        Optional<EmailModel> email = emailRepository.findById(id);
+        if (email.isPresent()) {
+           EmailModel emailConvertido  = emailMapper.map(emailDTO);
+            emailConvertido.setId(id);
+            emailRepository.save(emailConvertido);
+            EmailDTO emailDTOConvertido = emailMapper.map(emailConvertido);
+            return emailDTOConvertido;
+        }
+        return null;
     }
+
 
     public void deletar(Long id) {
         emailRepository.deleteById(id);
