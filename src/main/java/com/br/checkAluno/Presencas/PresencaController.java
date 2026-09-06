@@ -16,22 +16,22 @@ public class PresencaController {
     }
 
     @GetMapping("/listar")
-    public List<PresencaModel> listar(){
+    public List<PresencaDTO> listar(){
         return presencaService.listarPresenca();
     }
 
     @GetMapping("/list/{id}")
-    public PresencaModel listarPorID(@PathVariable Long id) {
+    public PresencaDTO listarPorID(@PathVariable Long id) {
         return presencaService.listarPorId(id);
     }
 
     @PostMapping("/criar")
-    public PresencaModel criar(@RequestBody PresencaModel presencaModel) {
+    public PresencaDTO criar(@RequestBody PresencaDTO presencaModel) {
         return presencaService.criar(presencaModel);
     }
 
     @PutMapping("/atualizar/{id}")
-    public PresencaModel atualizar(@PathVariable Long id, @RequestBody PresencaModel presencaModel) {
+    public PresencaDTO atualizar(@PathVariable Long id, @RequestBody PresencaDTO presencaModel) {
         return presencaService.atualizar(id, presencaModel);
     }
 
