@@ -77,7 +77,6 @@ public class EmailSerivce {
         return null;
     }
 
-
     public void deletar(Long id) {
         emailRepository.deleteById(id);
     }

@@ -1,5 +1,7 @@
 package com.br.checkAluno.Email;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,25 +10,41 @@ import java.util.List;
 @RequestMapping("/email")
 public class EmailController {
 
-    EmailSerivce emailSerivce;
+    private EmailSerivce emailSerivce;
 
     public EmailController(EmailSerivce emailSerivce) {
         this.emailSerivce = emailSerivce;
     }
 
     @GetMapping("/listar")
-    public List<EmailModel> listar() {
-        return emailSerivce.listar();
+    public ResponseEntity<List<EmailDTO>> listar() {
+         List<EmailDTO> emails = emailSerivce.listar();
+         return ResponseEntity.ok(emails);
     }
 
     @GetMapping("/listar/{id}")
-    public EmailModel listarPorID(@PathVariable Long id) {
-        return emailSerivce.listarPorId(id);
+    public ResponseEntity<?> listarPorID(@PathVariable Long id) {
+         EmailDTO email = emailSerivce.listarPorId(id);
+         if (email != null) {
+             return ResponseEntity.ok(email);
+         }
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email com " + id + " não encontrado");
     }
 
-    @PostMapping("/criar")
-    public EmailModel criarEmail(@RequestBody EmailModel emailModel) {
-        return emailSerivce.criar(emailModel);
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
+        emailSerivce.deletar(id);
+        return ResponseEntity.ok("Email com " + id + " deletado com Sucesso");
+
+    }
+
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody EmailDTO emailDTO) {
+        EmailDTO emailAtualizado = emailSerivce.atualizar(id, emailDTO);
+        if (emailAtualizado != null) {
+            return ResponseEntity.ok(emailAtualizado);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email com " + id + " não encontrado");
     }
 
 }
