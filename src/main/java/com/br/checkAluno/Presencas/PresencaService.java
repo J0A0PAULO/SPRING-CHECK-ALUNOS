@@ -63,9 +63,24 @@ public class PresencaService {
 
         PresencaModel presecaConvertidoParaModel = presencaMapper.map(presencaDTO);
         presecaConvertidoParaModel.setId(presencaEncontrada.getId());
+
+            if (presecaConvertidoParaModel.getStatus() == null) {
+                presecaConvertidoParaModel.setStatus(presencaEncontrada.getStatus());
+            }
+
+            if (presecaConvertidoParaModel.getDataHora() == null) {
+                presecaConvertidoParaModel.setDataHora(presencaEncontrada.getDataHora());
+            }
+
+            if (presecaConvertidoParaModel.getAlunosModel() == null) {
+                presecaConvertidoParaModel.setAlunosModel(presencaEncontrada.getAlunosModel());
+            }
+
         presencaRepository.save(presecaConvertidoParaModel);
         PresencaDTO presencaConvertidaParaDTO = presencaMapper.map(presecaConvertidoParaModel);
-        return presencaConvertidaParaDTO;
+
+
+            return presencaConvertidaParaDTO;
         }
         return null;
     }
