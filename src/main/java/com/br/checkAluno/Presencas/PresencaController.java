@@ -1,6 +1,9 @@
 package com.br.checkAluno.Presencas;
 
 
+import com.br.checkAluno.Resonsaveis.ResponsavelDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,28 +19,39 @@ public class PresencaController {
     }
 
     @GetMapping("/listar")
-    public List<PresencaDTO> listar(){
-        return presencaService.listarPresenca();
+    public ResponseEntity<List<PresencaDTO>> listar(){
+        List<PresencaDTO> Presencas = presencaService.listarPresenca();
+        return ResponseEntity.ok(Presencas);
     }
 
     @GetMapping("/list/{id}")
-    public PresencaDTO listarPorID(@PathVariable Long id) {
-        return presencaService.listarPorId(id);
+    public ResponseEntity<?> listarPorID(@PathVariable Long id) {
+        PresencaDTO presencaDTO = presencaService.listarPorId(id);
+        if (presencaDTO != null) {
+            return ResponseEntity.ok(presencaDTO);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario com " + id + " Não encontrado");
     }
 
     @PostMapping("/criar")
-    public PresencaDTO criar(@RequestBody PresencaDTO presencaModel) {
-        return presencaService.criar(presencaModel);
+    public ResponseEntity<?> criar(@RequestBody PresencaDTO presencaDTO) {
+        presencaService.criar(presencaDTO);
+        return ResponseEntity.ok("Criado com sucesso");
     }
 
     @PutMapping("/atualizar/{id}")
-    public PresencaDTO atualizar(@PathVariable Long id, @RequestBody PresencaDTO presencaModel) {
-        return presencaService.atualizar(id, presencaModel);
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody PresencaDTO presencaDTO) {
+        PresencaDTO presenca =  presencaService.atualizar(id, presencaDTO);
+        if (presenca != null) {
+            return ResponseEntity.ok(presenca);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Presença com id "+ id + " Não encontrado");
     }
 
     @DeleteMapping("/deletar/{id}")
-    public void deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
         presencaService.deletar(id);
+        return ResponseEntity.ok("Presença com " + id + " Deletado com sucesso!");
     }
 
 }
