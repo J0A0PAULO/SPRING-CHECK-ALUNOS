@@ -42,9 +42,37 @@ public class ResponsaveisService {
     public ResponsavelDTO atualizar(Long id, ResponsavelDTO responsavelDTO) {
         Optional<ResponsaveisModel> responsavelPorID = responsaveisRepository.findById(id);
         if (responsavelPorID.isPresent()) {
-          ResponsaveisModel responsavelEnviadoPeloUsuario = responsaveisMapper.map(responsavelDTO);
+            ResponsaveisModel responsavelEncontrado = responsavelPorID.get();
+            ResponsaveisModel responsavelEnviadoPeloUsuario = responsaveisMapper.map(responsavelDTO);
             responsavelEnviadoPeloUsuario.setId(id);
-          ResponsaveisModel responsavelDTOSalvo= responsaveisRepository.save(responsavelEnviadoPeloUsuario);
+
+            if (responsavelEnviadoPeloUsuario.getCpf() ==null) {
+                responsavelEnviadoPeloUsuario.setCpf(responsavelEncontrado.getCpf());
+            }
+
+            if (responsavelEnviadoPeloUsuario.getNome() ==null) {
+                responsavelEnviadoPeloUsuario.setNome(responsavelEncontrado.getNome());
+            }
+
+            if (responsavelEnviadoPeloUsuario.getEmail() ==null) {
+                responsavelEnviadoPeloUsuario.setEmail(responsavelEncontrado.getEmail());
+            }
+
+            if (responsavelEnviadoPeloUsuario.getAluno() ==null) {
+                responsavelEnviadoPeloUsuario.setAluno(responsavelEncontrado.getAluno());
+            }
+
+            if (responsavelEnviadoPeloUsuario.getTelefone() ==null) {
+                responsavelEnviadoPeloUsuario.setTelefone(responsavelEncontrado.getTelefone());
+            }
+
+            if (responsavelEnviadoPeloUsuario.getLocalDateTime() ==null) {
+                responsavelEnviadoPeloUsuario.setLocalDateTime(responsavelEncontrado.getLocalDateTime());
+            }
+
+
+
+            ResponsaveisModel responsavelDTOSalvo= responsaveisRepository.save(responsavelEnviadoPeloUsuario);
           return responsaveisMapper.map(responsavelDTOSalvo);
         }
         return null;

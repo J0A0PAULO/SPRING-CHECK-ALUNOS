@@ -1,5 +1,7 @@
 package com.br.checkAluno.Resonsaveis;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +17,38 @@ public class ResponsaveisController {
     }
 
     @GetMapping("/listar")
-    public List<ResponsavelDTO> listar() {
-        return responsaveisService.listar();
+    public ResponseEntity<List<ResponsavelDTO>> listar() {
+       List<ResponsavelDTO> responsavelDTOS = responsaveisService.listar();
+        return ResponseEntity.ok(responsavelDTOS);
     }
 
     @GetMapping("/listar/{id}")
-    public ResponsavelDTO listarPorId(@PathVariable Long id) {
-        return responsaveisService.listarPorId(id);
+    public ResponseEntity<?> listarPorId(@PathVariable Long id) {
+      ResponsavelDTO responsavel = responsaveisService.listarPorId(id);
+        if (responsavel != null) {
+            return ResponseEntity.ok(responsavel);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Responsavel com " +  id + " Responsavle não encontrado");
     }
 
     @PostMapping("/criar")
-    public ResponsavelDTO criar(@RequestBody ResponsavelDTO responsaveisModel) {
-        return responsaveisService.criar(responsaveisModel);
+    public ResponseEntity<?> criar(@RequestBody ResponsavelDTO responsavelDTO) {
+        responsaveisService.criar(responsavelDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Responsavel Criado");
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponsavelDTO atualizar(@PathVariable Long id,@RequestBody ResponsavelDTO responsaveisModel) {
-        return responsaveisService.atualizar(1L, responsaveisModel);
+    public ResponseEntity<?> atualizar(@PathVariable Long id,@RequestBody ResponsavelDTO responsavelDTO) {
+        ResponsavelDTO responsavel =  responsaveisService.atualizar(id  , responsavelDTO);
+        if (responsavel != null) {
+            return ResponseEntity.ok(responsavel);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Responsavel com " + id + " Não encontrado");
     }
 
     @DeleteMapping("/deletar/{id}")
-    public void deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
          responsaveisService.deletar(id);
+         return ResponseEntity.ok("Responsavel Deletado");
     }
-
 }
