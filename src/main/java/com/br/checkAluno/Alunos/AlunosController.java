@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("alunos")
 public class AlunosController {
 
-    AlunosService alunosService;
+    private AlunosService alunosService;
 
     public AlunosController(AlunosService alunosService) {
         this.alunosService = alunosService;

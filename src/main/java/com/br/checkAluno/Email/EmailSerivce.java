@@ -1,6 +1,8 @@
 package com.br.checkAluno.Email;
 
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,14 +11,44 @@ import java.util.Optional;
 @Service
 public class EmailSerivce {
 
-    EmailRepository emailRepository;
 
-    public EmailSerivce(EmailRepository emailRepository) {
+    private JavaMailSender javaMailSender;
+    private EmailRepository emailRepository;
+
+    public EmailSerivce(JavaMailSender javaMailSender, EmailRepository emailRepository) {
+        this.javaMailSender = javaMailSender;
         this.emailRepository = emailRepository;
     }
 
     public List<EmailModel> listar() {
         return emailRepository.findAll();
+    }
+
+    public void enviarEmail(String destinatario, String assunto, String texto ){
+
+        EmailModel emailLog = new EmailModel();
+        emailLog.setEmailParaDestinatario(destinatario);
+        emailLog.setAssunto(assunto);
+        emailLog.setTexto(texto);
+
+        try {
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(destinatario);
+            message.setSubject(assunto);
+            message.setText(texto);
+
+            javaMailSender.send(message);
+            emailLog.setStatusEmail("ENVIADO");
+
+        }catch (Exception e){
+            emailLog.setStatusEmail("ERRO");
+            System.err.println("Erro ao enviar e-mail:" + e.getMessage());
+        } finally {
+            emailRepository.save(emailLog);
+
+        }
+
     }
 
     public EmailModel listarPorId(Long id) {

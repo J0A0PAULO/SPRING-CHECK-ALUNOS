@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("responsaveis")
 public class ResponsaveisController {
 
-    ResponsaveisService responsaveisService;
+    private ResponsaveisService responsaveisService;
 
     public ResponsaveisController(ResponsaveisService responsaveisService ) {
         this.responsaveisService = responsaveisService;

@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "emails")
+@Table(name = "tb_emails_log")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +22,7 @@ public class EmailModel {
     @Column(name = "email_destinatario")
     private String emailParaDestinatario;
 
-    @Column(name = "assunto")
+    @Column(name = "assunto", nullable = false)
     private String assunto;
 
     @Column(name = "texto")

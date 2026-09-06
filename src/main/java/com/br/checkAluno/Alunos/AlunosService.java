@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class AlunosService {
 
-    AlunosRepository alunosRepository;
-    ResponsaveisRepository responsaveisRepository;
-    ResponsaveisMapper responsaveisMapper;
-    AlunosMapper alunosMapper;
+    private AlunosRepository alunosRepository;
+    private ResponsaveisRepository responsaveisRepository;
+    private ResponsaveisMapper responsaveisMapper;
+    private AlunosMapper alunosMapper;
 
     public AlunosService(AlunosRepository alunosRepository, ResponsaveisRepository responsaveisRepository,AlunosMapper alunosMapper, ResponsaveisMapper responsaveisMapper) {
         this.alunosRepository = alunosRepository;

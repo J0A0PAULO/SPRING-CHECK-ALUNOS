@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("presenca")
 public class PresencaController {
 
-    PresencaService presencaService;
+    private PresencaService presencaService;
 
     public PresencaController(PresencaService presencaService) {
         this.presencaService = presencaService;

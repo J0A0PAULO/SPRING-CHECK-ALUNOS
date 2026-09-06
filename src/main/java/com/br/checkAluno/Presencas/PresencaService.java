@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 @Service
 public class PresencaService {
 
-    PresencaRepository presencaRepository;
-    AlunosRepository alunosRepository;
-    PresencaMapper presencaMapper;
-    AlunosMapper alunosMapper;
+    private PresencaRepository presencaRepository;
+    private AlunosRepository alunosRepository;
+    private PresencaMapper presencaMapper;
 
-    public PresencaService(PresencaRepository presencaRepository, AlunosRepository alunosRepository, PresencaMapper presencaMapper, AlunosMapper alunosMapper) {
+
+    public PresencaService(PresencaRepository presencaRepository, AlunosRepository alunosRepository, PresencaMapper presencaMapper) {
         this.presencaRepository = presencaRepository;
         this.alunosRepository = alunosRepository;
         this.presencaMapper = presencaMapper;
-        this.alunosMapper = alunosMapper;
+
     }
 
     public List<PresencaDTO> listarPresenca() {
