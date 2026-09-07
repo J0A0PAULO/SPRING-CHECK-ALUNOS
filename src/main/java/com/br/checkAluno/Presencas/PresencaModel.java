@@ -1,7 +1,6 @@
 package com.br.checkAluno.Presencas;
 
 import com.br.checkAluno.Alunos.AlunosModel;
-import com.br.checkAluno.Alunos.AlunosService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+
 
 @Entity
 @Table(name = "presencas")
@@ -28,11 +27,11 @@ public class PresencaModel {
     private LocalDateTime dataHora;
 
     @Column(name = "status")
-    private String status;
+    private Boolean status;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnoreProperties("responsavel")
     @JoinColumn(name = "alunos_id")
-    private AlunosModel alunosModel;
+    private AlunosModel aluno;
 
 }

@@ -45,14 +45,23 @@ public class PresencaService {
 
 
     public PresencaDTO criar(PresencaDTO presencaDTO) {
-        Optional<AlunosModel> alunoReferencia = alunosRepository.findById(presencaDTO.getAlunosModel().getId());
+        Optional<AlunosModel> alunoReferencia = alunosRepository.findById(presencaDTO.getAluno().getId());
         if (alunoReferencia.isPresent()){
             AlunosModel aluno = alunoReferencia.get();
             PresencaModel presencaModel = presencaMapper.map(presencaDTO);
-            presencaModel.setAlunosModel(aluno);
-            presencaRepository.save(presencaModel);
-            PresencaDTO presencaSalva = presencaMapper.map(presencaModel);
-            return presencaSalva;
+            presencaModel.setAluno(aluno);
+            PresencaModel presencaSalva = presencaRepository.save(presencaModel);
+
+            if (Boolean.FALSE.equals(presencaSalva.getStatus())) {
+                String destinatario = aluno.getResponsavel().getEmail();
+                String assunto = "Aviso de Ausência " + aluno.getNome();
+                String texto = "Olá, informamos que o aluno " + aluno.getNome() + " registrou uma falta";
+                emailSerivce.enviarEmail(destinatario,assunto,texto);
+            }
+
+            PresencaDTO presencaSalvaDTO = presencaMapper.map(presencaSalva);
+
+            return presencaSalvaDTO;
         }
         return null;
     }
@@ -74,8 +83,8 @@ public class PresencaService {
                 presecaConvertidoParaModel.setDataHora(presencaEncontrada.getDataHora());
             }
 
-            if (presecaConvertidoParaModel.getAlunosModel() == null) {
-                presecaConvertidoParaModel.setAlunosModel(presencaEncontrada.getAlunosModel());
+            if (presecaConvertidoParaModel.getAluno() == null) {
+                presecaConvertidoParaModel.setAluno(presencaEncontrada.getAluno());
             }
 
         presencaRepository.save(presecaConvertidoParaModel);

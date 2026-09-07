@@ -8,7 +8,7 @@ public class PresencaMapper {
     public PresencaModel map(PresencaDTO presencaDTO) {
 
         PresencaModel presencaModel = new PresencaModel();
-        presencaModel.setAlunosModel(presencaDTO.getAlunosModel());
+        presencaModel.setAluno(presencaDTO.getAluno());
         presencaModel.setId(presencaDTO.getId());
         presencaModel.setStatus(presencaDTO.getStatus());
         presencaModel.setDataHora(presencaDTO.getDataHora());
@@ -21,7 +21,7 @@ public class PresencaMapper {
 
         PresencaDTO presencaDTO = new PresencaDTO();
 
-        presencaDTO.setAlunosModel(presencaModel.getAlunosModel());
+        presencaDTO.setAluno(presencaModel.getAluno());
         presencaDTO.setStatus(presencaModel.getStatus());
         presencaDTO.setId(presencaModel.getId());
         presencaDTO.setDataHora(presencaModel.getDataHora());
