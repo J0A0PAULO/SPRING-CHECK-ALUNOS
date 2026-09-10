@@ -1,5 +1,6 @@
 package com.br.checkAluno.Resonsaveis;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,14 @@ public class ResponsaveisController {
         this.responsaveisService = responsaveisService;
     }
 
+    @Operation(summary = "Listar todos Responsaveis", description = "Essa rota retorna uma lista com todos os responsaveis dos alunos")
     @GetMapping("/listar")
     public ResponseEntity<List<ResponsavelDTO>> listar() {
        List<ResponsavelDTO> responsavelDTOS = responsaveisService.listar();
         return ResponseEntity.ok(responsavelDTOS);
     }
 
+    @Operation(summary = "Listar responsavel por id", description = "Essa rota retorna um Responsavel por id")
     @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarPorId(@PathVariable Long id) {
       ResponsavelDTO responsavel = responsaveisService.listarPorId(id);

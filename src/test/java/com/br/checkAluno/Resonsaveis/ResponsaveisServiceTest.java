@@ -97,4 +97,123 @@ class ResponsaveisServiceTest {
 
     }
 
+    @Test
+    public void criarResponsavel() {
+
+        ResponsaveisModel responsaveisModel = new ResponsaveisModel(
+                1L,
+                "Julia",
+                "555",
+                "adm@gmail.com",
+                "5555",
+                LocalDateTime.now(),
+                List.of()
+        );
+
+        ResponsavelDTO responsavelDTO = new ResponsavelDTO(
+                1L,
+                "Julia",
+                "555",
+                "adm@gmail.com",
+                "5555",
+                LocalDateTime.now(),
+                List.of()
+        );
+
+        ResponsavelDTO responsavelDTOEntrada = new ResponsavelDTO(
+                null,
+                "Julia",
+                "555",
+                "adm@gmail.com",
+                "5555",
+                null,
+                List.of()
+        );
+
+        Mockito.when(responsaveisMapper.map(Mockito.any(ResponsavelDTO.class))).thenReturn(responsaveisModel);
+        Mockito.when(responsaveisRepository.save(Mockito.any(ResponsaveisModel.class))).thenReturn(responsaveisModel);
+        Mockito.when(responsaveisMapper.map(Mockito.any(ResponsaveisModel.class))).thenReturn(responsavelDTO);
+
+        ResponsavelDTO responsavelConvertidoComID = responsaveisService.criar(responsavelDTOEntrada);
+
+        assertNotNull(responsavelConvertidoComID);
+        assertEquals("Julia", responsavelConvertidoComID.getNome());
+        assertEquals(1L, responsavelConvertidoComID.getId());
+
+
+    }
+
+    @Test
+    public void atualizarResponsavel() {
+
+        ResponsaveisModel responsaveisModel = new ResponsaveisModel(
+                1L,
+                "Julia",
+                "555",
+                "adm@gmail.com",
+                "5555",
+                LocalDateTime.now(),
+                List.of()
+        );
+
+        ResponsaveisModel responsaveisModelSalvado = new ResponsaveisModel(
+                1L,
+                "Carla",
+                "552",
+                "adm@gmail.com",
+                "1555",
+                LocalDateTime.now(),
+                List.of()
+        );
+
+        ResponsavelDTO responsavelDTO = new ResponsavelDTO(
+                1L,
+                "Carla",
+                "552",
+                "adm@gmail.com",
+                "1555",
+                LocalDateTime.now(),
+                List.of()
+        );
+
+
+        Mockito.when(responsaveisRepository.findById(responsaveisModel.getId())).thenReturn(Optional.of(responsaveisModel));
+
+        Mockito.when(responsaveisMapper.map(Mockito.any(ResponsavelDTO.class))).thenReturn(responsaveisModel);
+
+        Mockito.when(responsaveisRepository.save(Mockito.any(ResponsaveisModel.class))).thenReturn(responsaveisModelSalvado);
+
+        Mockito.when(responsaveisMapper.map(Mockito.any(ResponsaveisModel.class))).thenReturn(responsavelDTO);
+
+        ResponsavelDTO responsavelAtualizado = responsaveisService.atualizar(1L, responsavelDTO);
+
+
+        assertNotNull(responsavelAtualizado);
+        assertEquals("Carla", responsavelAtualizado.getNome());
+        assertEquals(1L, responsavelAtualizado.getId());
+
+    }
+
+    @Test
+    public void deletarResponsavel() {
+
+        Long id = 1L;
+
+        ResponsaveisModel responsaveisModel = new ResponsaveisModel(
+                1L,
+                "Julia",
+                "555",
+                "adm@gmail.com",
+                "5555",
+                LocalDateTime.now(),
+                List.of()
+        );
+
+        responsaveisService.deletar(id);
+
+        Mockito.verify(responsaveisRepository, Mockito.times(1)).deleteById(id);
+
+
+    }
+
 }
