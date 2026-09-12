@@ -2,6 +2,7 @@ package com.br.checkAluno.Alunos;
 
 import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,7 +41,8 @@ public class AlunosModel {
     private LocalDate dataNascimento;
 
     @ManyToOne
-    @JsonIgnoreProperties("Aluno")
+    @JsonIgnoreProperties("aluno")
     @JoinColumn(name = "responsavel_id")
+    @Schema(hidden = true)
     private ResponsaveisModel responsavel;
 }

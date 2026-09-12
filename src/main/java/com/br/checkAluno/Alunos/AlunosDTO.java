@@ -2,6 +2,7 @@ package com.br.checkAluno.Alunos;
 
 import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class AlunosDTO {
     private String telefone;
     private Long matricula;
     private LocalDate dataNascimento;
-    @JsonIgnoreProperties("Aluno")
+    @JsonIgnoreProperties("aluno")
+    @Schema(hidden = true)
     private ResponsaveisModel responsavel;
 }

@@ -39,7 +39,8 @@ public class ResponsaveisModel {
     @Column(name = "criado_em", nullable = false, updatable = false)
     LocalDateTime localDateTime;
 
+
     @OneToMany(mappedBy = "responsavel")
-    private List<AlunosModel> Aluno;
+    private List<AlunosModel> aluno;
 
 }
