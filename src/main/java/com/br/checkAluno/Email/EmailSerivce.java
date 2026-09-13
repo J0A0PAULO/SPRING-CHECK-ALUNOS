@@ -65,17 +65,7 @@ public class EmailSerivce {
         return null;
     }
 
-    public EmailDTO atualizar (Long id, EmailDTO emailDTO) {
-        Optional<EmailModel> email = emailRepository.findById(id);
-        if (email.isPresent()) {
-           EmailModel emailConvertido  = emailMapper.map(emailDTO);
-            emailConvertido.setId(id);
-            emailRepository.save(emailConvertido);
-            EmailDTO emailDTOConvertido = emailMapper.map(emailConvertido);
-            return emailDTOConvertido;
-        }
-        return null;
-    }
+
 
     public void deletar(Long id) {
         emailRepository.deleteById(id);
