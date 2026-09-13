@@ -38,13 +38,6 @@ public class EmailController {
 
     }
 
-    @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody EmailDTO emailDTO) {
-        EmailDTO emailAtualizado = emailSerivce.atualizar(id, emailDTO);
-        if (emailAtualizado != null) {
-            return ResponseEntity.ok(emailAtualizado);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email com " + id + " não encontrado");
-    }
+
 
 }
