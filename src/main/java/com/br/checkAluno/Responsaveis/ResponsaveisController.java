@@ -3,6 +3,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +50,7 @@ public class ResponsaveisController {
             @ApiResponse(responseCode = "400", description = "Dados do responsavel invalidos")
     })
     @PostMapping("/criar")
-    public ResponseEntity<ResponsavelDTO> criar(@RequestBody ResponsavelDTO responsavelDTO) {
+    public ResponseEntity<ResponsavelDTO> criar(@Valid @RequestBody ResponsavelDTO responsavelDTO) {
        ResponsavelDTO responsavel = responsaveisService.criar(responsavelDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responsavel);
     }
@@ -61,7 +62,7 @@ public class ResponsaveisController {
             @ApiResponse(responseCode = "404", description = "Responsavel não encontrado")
     })
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<ResponsavelDTO> atualizar(@PathVariable Long id,@RequestBody ResponsavelDTO responsavelDTO) {
+    public ResponseEntity<ResponsavelDTO> atualizar(@PathVariable Long id,@Valid @RequestBody ResponsavelDTO responsavelDTO) {
         ResponsavelDTO responsavel =  responsaveisService.atualizar(id  , responsavelDTO);
         if (responsavel != null) {
             return ResponseEntity.ok(responsavel);
