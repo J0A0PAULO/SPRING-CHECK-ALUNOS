@@ -25,8 +25,8 @@ public class ResponsaveisController {
     })
     @GetMapping("/listar")
     public ResponseEntity<List<ResponsavelDTO>> listar() {
-       List<ResponsavelDTO> responsavelDTOS = responsaveisService.listar();
-        return ResponseEntity.ok(responsavelDTOS);
+       List<ResponsavelDTO> responsaveis = responsaveisService.listar();
+        return ResponseEntity.ok(responsaveis);
     }
 
     @Operation(summary = "Listar responsavel por id", description = "Essa rota retorna um Responsavel por id")
@@ -35,12 +35,12 @@ public class ResponsaveisController {
             @ApiResponse(responseCode = "404", description = "Responsavel não encontrado")
     })
     @GetMapping("/listar/{id}")
-    public ResponseEntity<?> listarPorId(@PathVariable Long id) {
+    public ResponseEntity<ResponsavelDTO> listarPorId(@PathVariable Long id) {
       ResponsavelDTO responsavel = responsaveisService.listarPorId(id);
         if (responsavel != null) {
             return ResponseEntity.ok(responsavel);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Responsavel com " +  id + " Responsavle não encontrado");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responsavel);
     }
 
     @Operation(summary = "Cria um responsavel", description = "Essa rota cria um responsavel")
@@ -49,7 +49,7 @@ public class ResponsaveisController {
             @ApiResponse(responseCode = "400", description = "Dados do responsavel invalidos")
     })
     @PostMapping("/criar")
-    public ResponseEntity<?> criar(@RequestBody ResponsavelDTO responsavelDTO) {
+    public ResponseEntity<ResponsavelDTO> criar(@RequestBody ResponsavelDTO responsavelDTO) {
        ResponsavelDTO responsavel = responsaveisService.criar(responsavelDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responsavel);
     }
@@ -61,12 +61,12 @@ public class ResponsaveisController {
             @ApiResponse(responseCode = "404", description = "Responsavel não encontrado")
     })
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id,@RequestBody ResponsavelDTO responsavelDTO) {
+    public ResponseEntity<ResponsavelDTO> atualizar(@PathVariable Long id,@RequestBody ResponsavelDTO responsavelDTO) {
         ResponsavelDTO responsavel =  responsaveisService.atualizar(id  , responsavelDTO);
         if (responsavel != null) {
             return ResponseEntity.ok(responsavel);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responsavel);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @Operation(summary = "Deletar responsavel", description = "Essa rota deleta responsavel")
@@ -75,7 +75,7 @@ public class ResponsaveisController {
             @ApiResponse(responseCode = "404", description = "Responsavel não encontrado")
     })
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
          responsaveisService.deletar(id);
          return ResponseEntity.noContent().build();
     }
