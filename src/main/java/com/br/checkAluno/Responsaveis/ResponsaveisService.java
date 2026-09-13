@@ -1,9 +1,5 @@
-package com.br.checkAluno.Resonsaveis;
+package com.br.checkAluno.Responsaveis;
 
-import com.br.checkAluno.Alunos.AlunosRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

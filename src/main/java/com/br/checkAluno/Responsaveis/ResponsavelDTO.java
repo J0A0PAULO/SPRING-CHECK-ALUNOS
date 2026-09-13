@@ -1,12 +1,10 @@
-package com.br.checkAluno.Resonsaveis;
+package com.br.checkAluno.Responsaveis;
 
 import com.br.checkAluno.Alunos.AlunosModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;

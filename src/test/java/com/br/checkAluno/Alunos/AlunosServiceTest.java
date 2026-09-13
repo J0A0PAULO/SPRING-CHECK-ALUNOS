@@ -1,9 +1,9 @@
 package com.br.checkAluno.Alunos;
 
-import com.br.checkAluno.Resonsaveis.ResponsaveisMapper;
-import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
-import com.br.checkAluno.Resonsaveis.ResponsaveisRepository;
-import com.br.checkAluno.Resonsaveis.ResponsavelDTO;
+import com.br.checkAluno.Responsaveis.ResponsaveisMapper;
+import com.br.checkAluno.Responsaveis.ResponsaveisModel;
+import com.br.checkAluno.Responsaveis.ResponsaveisRepository;
+import com.br.checkAluno.Responsaveis.ResponsavelDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

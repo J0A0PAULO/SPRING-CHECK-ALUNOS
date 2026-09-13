@@ -1,6 +1,6 @@
 package com.br.checkAluno.Alunos;
 
-import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
+import com.br.checkAluno.Responsaveis.ResponsaveisModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "alunos")

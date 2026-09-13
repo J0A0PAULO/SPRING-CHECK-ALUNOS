@@ -1,10 +1,8 @@
 package com.br.checkAluno.Presencas;
 
-import com.br.checkAluno.Alunos.AlunosDTO;
-import com.br.checkAluno.Alunos.AlunosMapper;
 import com.br.checkAluno.Alunos.AlunosModel;
 import com.br.checkAluno.Alunos.AlunosRepository;
-import com.br.checkAluno.Email.EmailSerivce;
+import com.br.checkAluno.Email.EmailService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +15,10 @@ public class PresencaService {
     private PresencaRepository presencaRepository;
     private AlunosRepository alunosRepository;
     private PresencaMapper presencaMapper;
-    private EmailSerivce emailSerivce;
+    private EmailService emailSerivce;
 
 
-    public PresencaService(PresencaRepository presencaRepository, AlunosRepository alunosRepository, PresencaMapper presencaMapper, EmailSerivce emailSerivce) {
+    public PresencaService(PresencaRepository presencaRepository, AlunosRepository alunosRepository, PresencaMapper presencaMapper, EmailService emailSerivce) {
         this.presencaRepository = presencaRepository;
         this.alunosRepository = alunosRepository;
         this.presencaMapper = presencaMapper;

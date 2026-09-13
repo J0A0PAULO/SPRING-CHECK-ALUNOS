@@ -1,9 +1,8 @@
 package com.br.checkAluno.Alunos;
 
-import com.br.checkAluno.Resonsaveis.ResponsaveisMapper;
-import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
-import com.br.checkAluno.Resonsaveis.ResponsaveisRepository;
-import com.br.checkAluno.Resonsaveis.ResponsavelDTO;
+import com.br.checkAluno.Responsaveis.ResponsaveisMapper;
+import com.br.checkAluno.Responsaveis.ResponsaveisModel;
+import com.br.checkAluno.Responsaveis.ResponsaveisRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

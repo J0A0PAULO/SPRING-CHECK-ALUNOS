@@ -10,14 +10,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class EmailSerivce {
+public class EmailService {
 
 
     private JavaMailSender javaMailSender;
     private EmailRepository emailRepository;
     private EmailMapper emailMapper;
 
-    public EmailSerivce(JavaMailSender javaMailSender, EmailRepository emailRepository, EmailMapper emailMapper) {
+    public EmailService(JavaMailSender javaMailSender, EmailRepository emailRepository, EmailMapper emailMapper) {
         this.javaMailSender = javaMailSender;
         this.emailRepository = emailRepository;
         this.emailMapper = emailMapper;

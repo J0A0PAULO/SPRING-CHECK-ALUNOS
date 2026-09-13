@@ -1,4 +1,4 @@
-package com.br.checkAluno.Resonsaveis;
+package com.br.checkAluno.Responsaveis;
 
 import org.springframework.stereotype.Component;
 

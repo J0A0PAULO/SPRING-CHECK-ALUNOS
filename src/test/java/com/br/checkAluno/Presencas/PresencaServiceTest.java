@@ -3,17 +3,15 @@ package com.br.checkAluno.Presencas;
 import com.br.checkAluno.Alunos.AlunosDTO;
 import com.br.checkAluno.Alunos.AlunosModel;
 import com.br.checkAluno.Alunos.AlunosRepository;
-import com.br.checkAluno.Email.EmailSerivce;
-import com.br.checkAluno.Resonsaveis.ResponsaveisModel;
-import com.br.checkAluno.Resonsaveis.ResponsavelDTO;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.br.checkAluno.Email.EmailService;
+import com.br.checkAluno.Responsaveis.ResponsaveisModel;
+import com.br.checkAluno.Responsaveis.ResponsavelDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,7 +37,7 @@ class PresencaServiceTest {
     private AlunosRepository alunosRepository;
 
     @Mock
-    private EmailSerivce emailSerivce;
+    private EmailService emailSerivce;
 
     @Test
     public void retornarUmaListaDePresenca() {
