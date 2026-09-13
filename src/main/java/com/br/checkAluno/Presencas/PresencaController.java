@@ -68,7 +68,7 @@
             if (presenca != null) {
                 return ResponseEntity.ok(presenca);
             }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(presenca);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
 

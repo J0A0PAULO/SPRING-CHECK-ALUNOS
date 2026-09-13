@@ -27,7 +27,7 @@ public class AlunosService {
 
     public List<AlunosDTO> listar() {
         List<AlunosModel> alunos = alunosRepository.findAll();
-        return alunos.stream().map(alunosMapper::map).collect(Collectors.toList());
+       return alunos.stream().map(alunosMapper::map).collect(Collectors.toList());
     }
 
 
