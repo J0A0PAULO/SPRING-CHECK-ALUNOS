@@ -4,6 +4,7 @@
     import io.swagger.v3.oas.annotations.responses.ApiResponse;
     import io.swagger.v3.oas.annotations.responses.ApiResponses;
     import io.swagger.v3.oas.annotations.tags.Tag;
+    import jakarta.validation.Valid;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
@@ -51,7 +52,7 @@
                 @ApiResponse(responseCode = "400", description = "Dados de presença invalido")
         })
         @PostMapping("/criar")
-        public ResponseEntity<PresencaDTO> criar(@RequestBody PresencaDTO presencaDTO) {
+        public ResponseEntity<PresencaDTO> criar(@Valid @RequestBody PresencaDTO presencaDTO) {
             PresencaDTO presenca = presencaService.criar(presencaDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(presenca);
         }
@@ -63,7 +64,7 @@
                 @ApiResponse(responseCode = "404", description = "Presença não encontrada")
         })
         @PutMapping("/atualizar/{id}")
-        public ResponseEntity<PresencaDTO> atualizar(@PathVariable Long id, @RequestBody PresencaDTO presencaDTO) {
+        public ResponseEntity<PresencaDTO> atualizar(@PathVariable Long id,@Valid @RequestBody PresencaDTO presencaDTO) {
             PresencaDTO presenca =  presencaService.atualizar(id, presencaDTO);
             if (presenca != null) {
                 return ResponseEntity.ok(presenca);
