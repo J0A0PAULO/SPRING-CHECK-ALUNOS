@@ -3,6 +3,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class AlunosController {
             @ApiResponse(responseCode = "400", description = "Dados de alunso Invalidos")
     })
     @PostMapping("/criar")
-    public ResponseEntity<AlunosDTO> criarAluno(@RequestBody AlunosDTO alunosDTO) {
+    public ResponseEntity<AlunosDTO> criarAluno(@Valid @RequestBody AlunosDTO alunosDTO) {
         AlunosDTO aluno = alunosService.criar(alunosDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(aluno);
     }
@@ -73,7 +74,7 @@ public class AlunosController {
             @ApiResponse(responseCode = "404", description = "Aluno não encontrado")
     })
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<AlunosDTO> atualizarAluno(@PathVariable Long id, @RequestBody AlunosDTO alunosDTO){
+    public ResponseEntity<AlunosDTO> atualizarAluno(@PathVariable Long id,@Valid @RequestBody AlunosDTO alunosDTO){
         AlunosDTO aluno = alunosService.atualizar(id,  alunosDTO);
         if (aluno != null) {
             return ResponseEntity.ok(aluno);
