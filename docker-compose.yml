@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-1
+    environment:
+      POSTGRES_DB: seu_banco
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sua_senha
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d seu_banco"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    image: api-check-aluno
+    container_name: api-check-aluno
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/seu_banco
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=sua_senha
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
