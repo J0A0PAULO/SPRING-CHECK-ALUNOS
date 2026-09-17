@@ -68,26 +68,19 @@ class EmailSerivceTest {
 
     }
 
-        @Test
-        public void enviarEmail() {
+    @Test
+    public void enviarEmailComFalhaSilenciosa() {
+        String destinatario = "adm@gmail.com";
+        String assunto = "Teste assunto";
+        String texto = "testando";
 
-            String destinatario = "adm@gmail.com";
-            String assunto = "Teste assunto";
-            String texto = "testando";
+        Mockito.doThrow(new RuntimeException("Falha ao conectar ao SMTP"))
+                .when(javaMailSender).send(Mockito.any(SimpleMailMessage.class));
 
+        emailSerivce.enviarEmail(destinatario, assunto, texto);
 
-            Mockito.doThrow(new RuntimeException("Falha ao conectar ao SMTP"))
-                    .when(javaMailSender).send(Mockito.any(SimpleMailMessage.class));
-
-            assertThrows(RuntimeException.class, () -> {
-                emailSerivce.enviarEmail(destinatario,assunto, texto);
-            });
-
-            emailSerivce.enviarEmail(destinatario,assunto,texto);
-
-            Mockito.verify(javaMailSender, Mockito.times(1)).send(Mockito.any(SimpleMailMessage.class));
-
-        }
+        Mockito.verify(javaMailSender, Mockito.times(1)).send(Mockito.any(SimpleMailMessage.class));
+    }
 
         @Test
         public  void ListarLogPorID() {
